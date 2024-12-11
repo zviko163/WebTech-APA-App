@@ -1,0 +1,154 @@
+@keyframes animate-welcome {
+    from {
+        transform: translate3d(-20%, 0, 0);
+      }
+      to {
+        transform: translate3d(0, 0, 0);
+      }
+  }
+
+body {
+    font-family: 'Be Vietnam Pro', 'Noto Sans', sans-serif;
+    line-height: 1.6;
+    color: rgb(160, 88, 88);
+}
+
+.hero {
+    background: url('../images/shammah_table.jpg') no-repeat center center/cover;
+    color: rgb(216, 24, 24);
+    text-align: center;
+    padding: 150px 0;
+    justify-self: center;
+    width: 90%;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+} .hero:hover{
+    transform: translateY(5px);
+    box-shadow: 0 6px 10px #f3e2e2;
+}
+
+.card .card-img-top {
+    height: 25rem;
+}
+
+.welcomes {
+    font-size: 3rem;
+    font-weight: bold;
+    justify-self: center;
+    color: rgb(160, 88, 88);
+    text-transform: uppercase;
+    position: relative;
+    animation: animate-welcome 4s linear;
+    /* animation-duration: 4s; */
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+} .card:hover{
+    transform: translateY(15px);
+    box-shadow: 0 6px 10px #f3e2e2;
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+} .card-body {
+    background-color: rgba(255, 235, 235, 0.348);
+}
+/* 
+.leaderboard {
+    margin-top: 50px;
+}
+
+.leaderboard table {
+    width: 100%;
+}
+
+.leaderboard th,
+.leaderboard td {
+    text-align: center;
+    padding: 10px;
+} */
+
+footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    background: #f8f9fa;
+    text-align: center;
+    height: 10rem;
+}
+
+nav {
+    height: 6rem;
+}
+
+.vertical-section {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 2rem;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    width: 90%;
+}
+
+.vertical-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.vertical-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px #fdd8d8;
+}
+
+.vertical-card h5 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.vertical-card p {
+    color: #6c757d;
+}
+
+.form-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    border-radius: 10px;
+    background: #f8f9fa;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.form-container h2 {
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: rgb(216, 24, 24);
+    text-align: center;
+}
+
+.form-container .btn-primary {
+    background-color: rgb(216, 24, 24);
+    border-color: rgb(216, 24, 24);
+}
+
+.form-container .btn-primary:hover {
+    background-color: rgb(160, 88, 88);
+    border-color: rgb(160, 88, 88);
+}
+
+.btn {
+    width: 50%;
+}
