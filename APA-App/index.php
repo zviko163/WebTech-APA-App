@@ -95,7 +95,7 @@
         <div class="vertical-card" style="display: flex; flex-direction: column; align-items: center;">
             <h5>LIKE US ALREADY?</h5>
             <p>You are more than welcome to be one of us. Sign up in the navigation bar!</p>
-            <a href="#">Sign Up</a>
+            <a href="view/signup.php">Sign Up</a>
         </div>
     </div>
 
