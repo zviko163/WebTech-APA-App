@@ -1,0 +1,129 @@
+body {
+    font-family: 'Be Vietnam Pro', 'Noto Sans', sans-serif;
+    line-height: 1.6;
+    color: rgb(160, 88, 88);
+    width: 100%;
+}
+.header {
+    border-bottom: 1px solid #f1eaea;
+    padding: 1rem 2rem;
+    color: #181111;
+}
+
+.header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.btn-create {
+    background-color: #d58889;
+    color: #181111;
+    font-weight: bold;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+}
+main {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px 0;
+}
+
+
+/* Profile Section */
+.profile-header {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.profile-header .image-container {
+    display: inline-block;
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    background-image: url('https://cdn.usegalileo.ai/sdxl10/36e9312a-0824-421c-b7e1-226579283a22.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.profile-header h2 {
+    font-size: 22px;
+    font-weight: bold;
+    color: #181111;
+    margin-top: 10px;
+}
+
+.profile-header p {
+    font-size: 14px;
+    color: #895d5e;
+}
+
+.profile-header .btn-group button {
+    background-color: #f1eaea;
+    border-radius: 10px;
+    padding: 10px;
+    font-weight: bold;
+    flex: 1;
+}
+
+.profile-header .btn-group .btn-message {
+    background-color: #d58889;
+}
+
+/* Profile Tabs */
+.profile-tabs {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+    margin-bottom: 30px;
+}
+
+.profile-tabs a {
+    font-size: 14px;
+    font-weight: bold;
+    padding: 15px 0;
+    text-align: center;
+    flex: 1;
+    color: #895d5e;
+}
+
+.profile-tabs a.active {
+    border-bottom: 3px solid #d58889;
+    color: #181111;
+}
+
+/* Profile Content */
+.profile-content {
+    margin-top: 40px;
+}
+
+.card {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.card h5 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #181111;
+}
+
+.card p {
+    font-size: 14px;
+    color: #895d5e;
+}
+
+/* Center alignment of overview, matches, and statistics */
+.section-header {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #181111;
+    margin-bottom: 30px;
+}

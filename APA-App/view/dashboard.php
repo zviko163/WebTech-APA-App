@@ -38,7 +38,7 @@
       <nav class="collapse navbar-collapse justify-content-center" id="navbarNav">
         <ul class="navbar-nav gap-3">
           <li class="nav-item">
-            <a href="dashboard.html" class="nav-link text-dark">Dashboard</a>
+            <a href="dashboard.php" class="nav-link text-dark">Dashboard</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link text-dark">Ladders</a>
@@ -99,7 +99,7 @@
       </div>
     </section>
   
-    <!-- Match Challenges -->
+    <!-- Match Challenges html -->
     <section class="container-fluid">
       <!-- Recent Challenge -->
       <section class="mt-4">
