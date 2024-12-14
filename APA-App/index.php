@@ -9,6 +9,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/homestyle.css">
 </head>
@@ -100,11 +102,37 @@
     </div>
 
     <!-- Footer -->
-    <footer>
-        <a>Some Ustun and ASC partnerships here</a>
-        <br><br>
-        <p>&copy; 2024 Pool Association. All Rights Reserved.</p>
+    <footer class="text-center p-4 bg-light">
+        <!-- Partnership Text Section -->
+        <div class="d-flex justify-content-center align-items-center mb-3">
+            <!-- First Logo: USTUN -->
+            <div class="d-flex align-items-center mx-3">
+                <img src="assets/images/ustun_logo.jpg" alt="Logo" style="width: 40px; height: 40px; object-fit: cover;" class="rounded-circle me-2">
+                <span>USTUN</span>
+            </div>
+            <!-- Second Logo: ASC -->
+            <div class="d-flex align-items-center mx-3">
+                <img src="assets/images/asc_logo.jpg" alt="Logo" style="width: 40px; height: 40px; object-fit: cover;" class="rounded-circle me-2">
+                <span>ASC</span>
+            </div>
+        </div>
+
+        <!-- Social Media Icons -->
+        <div class="d-flex justify-content-center mb-3">
+            <!-- WhatsApp Icon -->
+            <a href="https://chat.whatsapp.com/GqWz76Nrg7BCslbCbs47bv" target="_blank" class="mx-3">
+                <i class="bi bi-whatsapp" style="font-size: 32px; color: #25D366;"></i>
+            </a>
+            <!-- Instagram Icon -->
+            <a href="https://www.instagram.com/ashesi_pool_association/profilecard/?igsh=MTN1YTFpMWhoOGs2MQ==" target="_blank" class="mx-3">
+                <i class="bi bi-instagram" style="font-size: 32px; color: #E4405F;"></i>
+            </a>
+        </div>
+
+        <!-- Copyright Text -->
+        <p>&copy; 2024 Ashesi Pool Association. All Rights Reserved.</p>
     </footer>
+
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>

@@ -40,7 +40,7 @@
             <a href="dashboard.php" class="nav-link text-dark">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link text-dark">Ladders</a>
+            <a href="#" class="nav-link text-dark">Leaderboard</a>
           </li>
           <li class="nav-item">
             <a href="events.php" class="nav-link text-dark">Events</a>
@@ -86,7 +86,7 @@
             "
             ></div>
             </div>
-            <h2>Michael Scott</h2>
+            <h2>Shammah Dzwairo</h2>
             <p>3.5 - San Francisco, CA</p>
             <p>Member since 2018</p>
 
