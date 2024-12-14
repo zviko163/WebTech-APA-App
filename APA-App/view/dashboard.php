@@ -44,20 +44,20 @@
             <a href="#" class="nav-link text-dark">Ladders</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link text-dark">Tournaments</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link text-dark">Leagues</a>
+            <a href="events.php" class="nav-link text-dark">Events</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link text-dark">Matches</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link text-dark">Contact Support</a>
           </li>
         </ul>
       </nav>
   
       <!-- Profile Section -->
       <div class="d-flex align-items-center gap-3">
-        <button class="btn btn-create px-4">Profile</button>
+        <button class="btn btn-create px-4" onclick="window.location.href = 'profile.php'">Profile</button>
         <div
           class="profile-pic rounded-circle"
           style="

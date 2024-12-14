@@ -76,6 +76,10 @@ main {
     background-color: #d58889;
 }
 
+.btn {
+    background-color: #d58889;
+    color: #181111;
+}
 /* Profile Tabs */
 .profile-tabs {
     display: flex;

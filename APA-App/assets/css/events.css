@@ -1,0 +1,52 @@
+body {
+    font-family: 'Be Vietnam Pro', 'Noto Sans', sans-serif;
+    line-height: 1.6;
+    color: rgb(160, 88, 88);
+    width: 100%;
+  }
+
+  .header {
+    border-bottom: 1px solid #f1eaea;
+    padding: 1rem 2rem;
+    color: #181111;
+  }
+
+  .header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+.hero {
+    background: url('../images/APA-DOUBLES.jpg') no-repeat center center/cover;
+    color: rgb(205, 93, 93);
+    text-align: center;
+    padding: 150px 0;
+    justify-self: center;
+    width: 90%;
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+} .hero:hover{
+    transform: translateY(5px);
+    box-shadow: 0 6px 10px #f3e2e2;
+} .card {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+} .card:hover{
+    transform: translateY(15px);
+    box-shadow: 0 6px 10px #f3e2e2;
+}
+
+.card img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 5px;
+} .card-body {
+    background-color: rgba(255, 235, 235, 0.348);
+} footer {
+    margin-top: 50px;
+    padding: 20px 0;
+    background: #f8f9fa;
+    text-align: center;
+    height: 10rem;
+}

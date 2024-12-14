@@ -43,13 +43,13 @@
             <a href="#" class="nav-link text-dark">Ladders</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link text-dark">Tournaments</a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link text-dark">Leagues</a>
+            <a href="events.php" class="nav-link text-dark">Events</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link text-dark">Matches</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link text-dark">Contact Support</a>
           </li>
         </ul>
       </nav>
