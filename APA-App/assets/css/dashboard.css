@@ -1,0 +1,82 @@
+body {
+    font-family: 'Be Vietnam Pro', 'Noto Sans', sans-serif;
+    line-height: 1.6;
+    color: rgb(160, 88, 88);
+    width: 100%;
+  }
+
+  .header {
+    border-bottom: 1px solid #f1eaea;
+    padding: 1rem 2rem;
+    color: #181111;
+  }
+
+  .header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+
+  .btn-create {
+    background-color: #d58889;
+    color: #181111;
+    font-weight: bold;
+  }
+
+  .profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .welcome-section h3 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #181111;
+  }
+
+  .challenge-card {
+    /* max-width: 100%; Makes it fit the parent container */
+    /* width: 100%; Ensures it stretches on smaller screens */
+    border: 1px solid #f1eaea;
+    border-radius: 8px;
+    padding: 1rem;
+    background-color: white;
+    /* box-sizing: border-box; */
+  }
+
+  .challenge-card .icon {
+    background-color: #f1eaea;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+  }
+
+  .btn-approve {
+    background-color: #d4edda;
+    color: #155724;
+    font-weight: bold;
+  }
+
+  .btn-decline {
+    background-color: #f8d7da;
+    color: #721c24;
+    font-weight: bold;
+  }
+  main.container {
+    max-width: 100% !important; /* Overrides Bootstrap max-width */
+    padding-left: 0;
+    padding-right: 0;
+  }
+  section{
+    padding: 0 1rem;
+  }
+  .card{
+    border-radius: 8px;
+    background-color: #feebeb;
+  }
+  
