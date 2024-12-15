@@ -17,18 +17,26 @@
     <!-- Signup Form -->
     <div class="form-container">
         <h2>Signup</h2>
-        <form>
+        <form id="signupForm" action="../actions/signup_user.php" method="POST" novalidate>
             <div class="mb-3">
-                <label for="signupName" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="signupName" placeholder="Enter your full name">
+                <label for="signupName" class="form-label">Username</label>
+                <input type="text" name="username" class="form-control" id="signupName" placeholder="Enter your username">
+                <small id="usernameError" class="text-danger"></small>
             </div>
             <div class="mb-3">
                 <label for="signupEmail" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email">
+                <input type="email" name="email" class="form-control" id="signupEmail" placeholder="Enter your email">
+                <small id="emailError" class="text-danger"></small>
             </div>
             <div class="mb-3">
                 <label for="signupPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="signupPassword" placeholder="Create a password">
+                <input type="password" name="password" class="form-control" id="signupPassword" placeholder="Create a password">
+                <small id="passwordError" class="text-danger"></small>
+            </div>
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Confirm Password</label>
+                <input type="password" name="confirmPassword" class="form-control" id="confirmPassword" placeholder="Confirm password">
+                <small id="confirmPasswordError" class="text-danger"></small>
             </div>
             <button type="submit" class="btn btn-primary w-100">Signup</button>
         </form>
@@ -42,6 +50,8 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../assets/js/form_validations.js"></script>
 </body>
 
 </html>

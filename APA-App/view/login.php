@@ -17,20 +17,18 @@
     <!-- Login Form -->
     <div class="form-container">
         <h2>Login</h2>
-        <form>
+        <form id="loginForm" action="../actions/login_user.php" method="POST" novalidate>
             <div class="mb-3">
                 <label for="loginEmail" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email">
+                <input type="email" name="email" class="form-control" id="loginEmail" placeholder="Enter your email">
+                <small class="text-danger" id="emailError"></small>
             </div>
             <div class="mb-3">
                 <label for="loginPassword" class="form-label">Password</label>
-                <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password">
+                <input type="password"name="password" class="form-control" id="loginPassword" placeholder="Enter your password">
+                <small class="text-danger" id="passwordError"></small>
             </div>
             <button type="submit" class="btn btn-primary w-100">Login</button>
-
-            <!-- <div class="text-center mt-3">
-                <a href="#">Forgot your password?</a>
-            </div> -->
         </form>
         <div style="display: flex; flex-direction: row; justify-content: center;">
             <a>Don't have an account? </a>
@@ -40,6 +38,8 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../assets/js/form_validations.js"></script>
 </body>
 
 </html>

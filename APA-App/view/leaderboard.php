@@ -50,7 +50,7 @@
                     <a href="events.php" class="nav-link text-dark">Events</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-dark">Matches</a>
+                    <a href="#" class="nav-link text-dark">Challenge</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link text-dark">Contact Support</a>
@@ -83,7 +83,7 @@
               <tr>
                   <th>Rank</th>
                   <th>Player</th>
-                  <th>Rating</th>
+                  <th>Played</th>
                   <th>Wins</th>
                   <th>Losses</th>
                   <th>Win %</th>
@@ -93,7 +93,7 @@
               <tr>
                   <td>1</td>
                   <td>John Smith</td>
-                  <td>1500</td>
+                  <td>20</td>
                   <td>10</td>
                   <td>2</td>
                   <td>83%</td>
@@ -101,7 +101,7 @@
               <tr>
                   <td>2</td>
                   <td>Jane Doe</td>
-                  <td>1450</td>
+                  <td>12</td>
                   <td>8</td>
                   <td>4</td>
                   <td>67%</td>
@@ -109,7 +109,7 @@
               <tr>
                   <td>3</td>
                   <td>Mike Johnson</td>
-                  <td>1400</td>
+                  <td>11</td>
                   <td>6</td>
                   <td>6</td>
                   <td>50%</td>
