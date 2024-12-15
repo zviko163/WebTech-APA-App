@@ -50,3 +50,8 @@ body {
     text-align: center;
     height: 10rem;
 }
+.btn-create {
+    background-color: #d58889;
+    color: #181111;
+    font-weight: bold;
+  }

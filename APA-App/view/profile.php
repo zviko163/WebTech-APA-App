@@ -40,7 +40,7 @@
             <a href="dashboard.php" class="nav-link text-dark">Dashboard</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link text-dark">Leaderboard</a>
+            <a href="leaderboard.php" class="nav-link text-dark">Leaderboard</a>
           </li>
           <li class="nav-item">
             <a href="events.php" class="nav-link text-dark">Events</a>

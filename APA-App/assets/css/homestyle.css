@@ -63,20 +63,6 @@ body {
 } .card-body {
     background-color: rgba(255, 235, 235, 0.348);
 }
-/* 
-.leaderboard {
-    margin-top: 50px;
-}
-
-.leaderboard table {
-    width: 100%;
-}
-
-.leaderboard th,
-.leaderboard td {
-    text-align: center;
-    padding: 10px;
-} */
 
 footer {
     margin-top: 50px;

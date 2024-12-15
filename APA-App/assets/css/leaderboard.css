@@ -1,0 +1,33 @@
+body {
+    font-family: 'Be Vietnam Pro', 'Noto Sans', sans-serif;
+    line-height: 1.6;
+    color: rgb(160, 88, 88);
+}
+.header {
+    border-bottom: 1px solid #f1eaea;
+    padding: 1rem 2rem;
+    color: #181111;
+  }
+
+  .header h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+.leaderboard {
+    margin-top: 50px;
+}
+
+.leaderboard table {
+    width: 100%;
+}
+
+.leaderboard th,
+.leaderboard td {
+    text-align: center;
+    padding: 10px;
+}
+.btn-create {
+    background-color: #d58889;
+    color: #181111;
+    font-weight: bold;
+}
