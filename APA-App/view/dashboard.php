@@ -76,7 +76,7 @@
   <main class="container-fluid mt-4">
     <!-- Welcome Section -->
     <section class="welcome-section text-center mb-4">
-      <h3>Welcome, Jack</h3>
+      <h3 id="welcomeMessage">Welcome, Jack</h3>
       <!-- <h5 class="text-muted">Place a challenge</h5> -->
     </section>
   
@@ -86,7 +86,7 @@
       <div class="col-12 col-md-6 mb-3">
         <div class="card shadow-sm p-3">
           <h5>Total Matches Played</h5>
-          <h2 class="text-primary">42</h2>
+          <h2 id="totalMatches" class="text-primary">0</h2>
         </div>
       </div>
   
@@ -94,7 +94,7 @@
       <div class="col-12 col-md-6 mb-3">
         <div class="card shadow-sm p-3">
           <h5>Win Rate</h5>
-          <h2 class="text-success">75%</h2>
+          <h2 id="winRate" class="text-success">0%</h2>
         </div>
       </div>
     </section>
@@ -104,21 +104,13 @@
       <!-- Recent Challenge -->
       <section class="mt-4">
         <h5 class="text-dark">Challenges</h5>
-        <div class="challenge-card d-flex align-items-center justify-content-between p-3 shadow-sm">
-          <div class="d-flex align-items-center gap-3">
-            <div class="icon">
-              <svg width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="..." />
-              </svg>
-            </div>
-            <div>
-              <h6 class="mb-0">John Doe challenged you to a match!</h6>
-              <p class="text-muted mb-0">5 minutes ago</p>
-            </div>
-          </div>
-          <div class="d-flex gap-2">
-            <button class="btn btn-approve">Approve</button>
-            <button class="btn btn-decline">Decline</button>
+        <div class="challenges-section"></div>
+        <div id="matchDetailsPopup" class="popup hidden">
+          <div class="popup-content">
+            <h5 class="popup-title">Match Details</h5>
+            <p id="matchTime"></p>
+            <p class="popup-message">Communicate with your opponent to confirm availability and logistics for the match.</p>
+            <button class="btn btn-close" id="closePopup"></button>
           </div>
         </div>
       </section>
@@ -126,20 +118,7 @@
       <!-- Upcoming Matches -->
       <section class="mt-4">
         <h5 class="text-dark">Upcoming Matches</h5>
-        <div class="challenge-card d-flex align-items-center justify-content-between p-3 shadow-sm">
-          <div class="d-flex align-items-center gap-3">
-            <div class="icon">
-              <svg width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path d="..." />
-              </svg>
-            </div>
-            <div>
-              <h6 class="mb-0">Match against Team Alpha</h6>
-              <p class="text-muted mb-0">Scheduled for tomorrow at 3 PM</p>
-            </div>
-          </div>
-          <button class="btn btn-create">View Details</button>
-        </div>
+        <div class="upcoming-matches-container"></div>
       </section>
     </section>
   </main>
@@ -147,6 +126,8 @@
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom JS -->
+  <script src="../assets/js/dashboard_script.js"></script>
 </body>
 
 </html>
