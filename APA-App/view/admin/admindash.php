@@ -37,21 +37,18 @@
             <!-- Navigation Links -->
             <nav class="collapse navbar-collapse justify-content-center" id="navbarNav">
                 <ul class="navbar-nav gap-3">
-                <li class="nav-item">
-                    <a href="admindash.php" class="nav-link text-dark">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a href="users.php" class="nav-link text-dark">Users</a>
-                </li>
-                <li class="nav-item">
-                    <a href="admin_events.php" class="nav-link text-dark">Events</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link text-dark">Matches</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link text-dark">Contact Support</a>
-                </li>
+                    <li class="nav-item">
+                        <a href="admindash.php" class="nav-link text-dark">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="users.php" class="nav-link text-dark">Users</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="admin_events.php" class="nav-link text-dark">Events</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link text-dark">Matches</a>
+                    </li>
                 </ul>
             </nav>
         
@@ -63,7 +60,7 @@
                 style="
                     width: 40px;
                     height: 40px;
-                    background-image: url('../assets/images/chalk.jpg');
+                    background-image: url('../../assets/images/chalk.jpg');
                     background-size: cover;
                     background-position: center;
                 "
