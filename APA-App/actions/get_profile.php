@@ -11,7 +11,6 @@ $user_id = $_SESSION['user_id'];
 $query = "
     SELECT 
         p.bio, 
-        p.club, 
         p.picture, 
         p.club, 
         GROUP_CONCAT(a.award_name ORDER BY a.award_name ASC) AS achievements
@@ -31,7 +30,6 @@ $result = $stmt->get_result();
 if ($row = $result->fetch_assoc()) {
     echo json_encode([
         'bio' => $row['bio'],
-        'club' => $row['club'],
         'club' => $row['club'],
         'achievements' => $row['achievements'] ? explode(',', $row['achievements']) : [],
         'picture' => $row['picture']

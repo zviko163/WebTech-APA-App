@@ -60,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
                           <textarea id="bioInput" class="form-control" rows="4">${data.bio || ''}</textarea>
                       </div>
                       <button type="submit" class="btn btn-primary" onclick="saveBio()">Save Changes</button>
+                      <p id="bioMessage" style="margin-top: 10px; font-weight: bold;"></p>
                   </form>
               </div>
           `;
@@ -86,7 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Display Club Affiliations
             clubAffiliationsTab.innerHTML = `
-                <p>${data.club_affiliations || "This is the club affiliations section. You can update your club affiliations here."}</p>
+                <p>${data.club || "This is the club affiliations section. You can update your club affiliations here."}</p>
                 <button class="btn btn-outline-primary d-block mx-auto" onclick="showEditForm('club-affiliations')">Edit Club Affiliations</button>
                 <div id="club-affiliations-edit-form" class="edit-form" style="display:none;">
                     <h3>Edit Club Affiliations</h3>
@@ -96,6 +97,7 @@ document.addEventListener("DOMContentLoaded", function () {
                             <textarea id="clubAffiliationsInput" class="form-control" rows="4"></textarea>
                         </div>
                         <button type="submit" onclick="saveClubAffiliations()" class="btn btn-primary">Save Changes</button>
+                        <p id="clubMessage" style="margin-top: 10px; font-weight: bold;"></p>
                     </form>
                 </div>
             `;
@@ -124,8 +126,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 }
 
-
-
   /*
    * Save functions for bio, achievements, and club affiliations
    * Making the accessed globally by using window.functionName
@@ -140,13 +140,21 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .then(response => response.json())
     .then(data => {
+        const messageElement = document.getElementById('bioMessage');
+
         if (data.success) {
-            alert(data.success);
+            messageElement.textContent = data.success;
+            messageElement.style.color = 'green'; // Success message in green
         } else {
-            alert(data.error);
+            messageElement.textContent = data.error;
+            messageElement.style.color = 'red'; // Error message in red
         }
     })
     .catch(error => console.error('Error updating bio:', error));
+    const messageElement = document.getElementById('bioMessage');
+    messageElement.textContent = 'An unexpected error occurred.';
+    messageElement.style.color = 'red';
+    
 }
 
 
@@ -166,13 +174,20 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .then(response => response.json())
     .then(data => {
-        if (data.success) {
-            alert(data.success);
-        } else {
-            alert(data.error);
-        }
+      const messageElement = document.getElementById('clubMessage');
+
+      if (data.success) {
+          messageElement.textContent = data.success;
+          messageElement.style.color = 'green'; // Success message in green
+      } else {
+          messageElement.textContent = data.error;
+          messageElement.style.color = 'red'; // Error message in red
+      }
     })
     .catch(error => console.error('Error updating club affiliations:', error));
+    const messageElement = document.getElementById('clubMessage');
+    messageElement.textContent = 'An unexpected error occurred.';
+    messageElement.style.color = 'red';
 }
 
 

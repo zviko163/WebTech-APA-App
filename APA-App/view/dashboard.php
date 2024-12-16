@@ -53,7 +53,7 @@
             <a href="challenges.php" class="nav-link text-dark">Challenge</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link text-dark">Contact Support</a>
+            <a href="support.php" class="nav-link text-dark">Contact Support</a>
           </li>
         </ul>
       </nav>

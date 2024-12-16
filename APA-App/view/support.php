@@ -1,44 +1,24 @@
-<?php
-include '../db/config.php';  // Include database connection
-
-// Fetch upcoming events (date greater than current time)
-$current_time = date('Y-m-d H:i:s');  // Get the current date and time
-$query = "SELECT * FROM events WHERE date > ? ORDER BY date ASC";
-$stmt = $conn->prepare($query);
-$stmt->bind_param('s', $current_time);  // Bind the current time to the query
-$stmt->execute();
-$result = $stmt->get_result();
-
-// Fetch all events into an array
-$upcoming_events = [];
-while ($event = $result->fetch_assoc()) {
-    $upcoming_events[] = $event;
-}
-?>
-
-
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Events</title>
+    <title>Contact Support</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;900&family=Noto+Sans:wght@400;500;700;900&display=swap" rel="stylesheet">
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="../assets/css/events.css">
+    <link rel="stylesheet" href="../assets/css/leaderboard.css">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
-
 <body>
     <header class="header navbar navbar-expand-md bg-light p-3">
         <div class="container-fluid d-flex justify-content-between align-items-center">
         <!-- Logo Section -->
         <div class="d-flex align-items-center gap-3">
-            <!-- Logo -->
+        <!-- Logo -->
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
                 <circle cx="12" cy="12" r="10" fill="black"/>
                 <circle cx="12" cy="12" r="6" fill="white"/>
@@ -97,54 +77,29 @@ while ($event = $result->fetch_assoc()) {
         </div>
         </div>
     </header>
-    <br>
-    <div class="container mt-5">
-        <h2>Challenge a Player</h2>
 
-        <!-- Search Bar -->
-        <input type="text" id="searchBar" class="form-control" placeholder="Search for a user by username" />
-
-        <!-- User List -->
-        <div id="userList" class="mt-3">
-            <!-- User cards will be dynamically added here -->
-        </div>
+    <!-- Contact Support Table -->
+    <div class="container contact-support">
+        <h2>Contact Support - Admin Users</h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>User Role</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                    include '../actions/get_admins.php'; // fetching admin user data
+                ?>
+            </tbody>
+        </table>
     </div>
 
 
-    <footer class="text-center p-4 bg-light">
-        <!-- Partnership Text Section -->
-        <div class="d-flex justify-content-center align-items-center mb-3">
-            <!-- First Logo: USTUN -->
-            <div class="d-flex align-items-center mx-3">
-                <img src="../assets/images/ustun_logo.jpg" alt="Logo" style="width: 40px; height: 40px; object-fit: cover;" class="rounded-circle me-2">
-                <span>USTUN</span>
-            </div>
-            <!-- Second Logo: ASC -->
-            <div class="d-flex align-items-center mx-3">
-                <img src="../assets/images/asc_logo.jpg" alt="Logo" style="width: 40px; height: 40px; object-fit: cover;" class="rounded-circle me-2">
-                <span>ASC</span>
-            </div>
-        </div>
-
-        <!-- Social Media Icons -->
-        <div class="d-flex justify-content-center mb-3">
-            <!-- WhatsApp Icon -->
-            <a href="https://chat.whatsapp.com/GqWz76Nrg7BCslbCbs47bv" target="_blank" class="mx-3">
-                <i class="bi bi-whatsapp" style="font-size: 32px; color: #25D366;"></i>
-            </a>
-            <!-- Instagram Icon -->
-            <a href="https://www.instagram.com/ashesi_pool_association/profilecard/?igsh=MTN1YTFpMWhoOGs2MQ==" target="_blank" class="mx-3">
-                <i class="bi bi-instagram" style="font-size: 32px; color: #E4405F;"></i>
-            </a>
-        </div>
-
-        <!-- Copyright Text -->
-        <p>&copy; 2024 Ashesi Pool Association. All Rights Reserved.</p>
-    </footer>
-
     <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/challenges_script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
-
 </html>
