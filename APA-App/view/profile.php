@@ -1,3 +1,19 @@
+<?php
+// Fetch user ID from session
+session_start();
+$user_id = $_SESSION['user_id'];
+$username = $_SESSION['username'];
+$email = $_SESSION['email'];
+?>
+<script>
+// Pass PHP variable to JavaScript
+const userId = <?php echo $user_id; ?>;
+const username = "<?php echo $username; ?>";  
+const email = "<?php echo $email; ?>";
+// challenge
+</script>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +30,11 @@
     <div class="container-fluid d-flex justify-content-between align-items-center">
       <!-- Logo Section -->
       <div class="d-flex align-items-center gap-3">
-        <svg width="32" height="32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="..." />
+        <!-- Logo -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="black"/>
+            <circle cx="12" cy="12" r="6" fill="white"/>
+            <text x="12" y="16" font-size="6" font-family="Arial" font-weight="bold" text-anchor="middle" fill="black">8</text>
         </svg>
         <h2 class="mb-0">Ashesi Pool Association</h2>
       </div>
@@ -46,7 +65,7 @@
             <a href="events.php" class="nav-link text-dark">Events</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link text-dark">Challenge</a>
+            <a href="challenges.php" class="nav-link text-dark">Challenge</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link text-dark">Contact Support</a>
@@ -56,16 +75,11 @@
   
       <!-- Profile Picture Section -->
       <div class="d-flex align-items-center gap-3">
-        <div
-          class="profile-pic rounded-circle"
-          style="
-            width: 40px;
-            height: 40px;
-            background-image: url('../assets/images/chalk.jpg');
-            background-size: cover;
-            background-position: center;
-          "
-        ></div>
+      <div
+        class="profile-pic rounded-circle"
+        id="profilePicHeader" 
+        style="width: 40px; height: 40px; background-size: cover; background-position: center;"
+      ></div>
       </div>
     </div>
   </header>
@@ -76,23 +90,18 @@
         <div class="profile-header">
             <div class="image-container">
             <div
-            class="profile-pic rounded-circle"
-            style="
-                width: 8rem;
-                height: 8rem;
-                background-image: url('../assets/images/chalk.jpg');
-                background-size: cover;
-                background-position: center;
-            "
+              class="profile-pic rounded-circle"
+              id="profilePicMain"
+              style="width: 8rem; height: 8rem; background-size: cover; background-position: center;"
             ></div>
             </div>
-            <h2>Shammah Dzwairo</h2>
-            <p>3.5 - San Francisco, CA</p>
-            <p>Member since 2018</p>
+            <h2 id="username"></h2>
+            <p>Ashesi University</p>
+            <p id="email"></p>
 
             <!-- Profile Buttons -->
             <div class="btn-group d-flex gap-3 justify-content-center mb-4">
-                <button class="btn">Challenge</button>
+                <button class="btn">Logout</button>
                 <button class="btn btn-message" data-bs-toggle="modal" data-bs-target="#profileModal">Update Profile</button>
             </div>
         </div>
@@ -106,50 +115,15 @@
 
         <!-- Bio Section -->
         <div id="bio" class="tab-content">
-            <p>This is the bio section. You can update your personal information here.</p>
-            <button class="btn btn-outline-primary d-block mx-auto" onclick="showEditForm('bio')">Edit Bio</button>
-            <div id="bio-edit-form" class="edit-form" style="display:none;">
-                <h3>Edit Bio</h3>
-                <form>
-                    <div class="mb-3">
-                        <label for="bioInput" class="form-label">New Bio</label>
-                        <textarea id="bioInput" class="form-control" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
-            </div>
+            <!-- Dynamic content will be injected here by profile.js -->
         </div>
 
         <!-- Achievements Section -->
-        <div id="achievements" class="tab-content" style="display:none;">
-            <p>This is the achievements section. You can update your achievements here.</p>
-            <button class="btn btn-outline-primary d-block mx-auto" onclick="showEditForm('achievements')">Edit Achievements</button>
-            <div id="achievements-edit-form" class="edit-form" style="display:none;">
-                <h3>Edit Achievements</h3>
-                <form>
-                    <div class="mb-3">
-                        <label for="achievementsInput" class="form-label">New Achievements</label>
-                        <textarea id="achievementsInput" class="form-control" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
-            </div>
-        </div>
+        <div id="achievements" class="tab-content" style="display:none"></div>
 
         <!-- Club Affiliations Section -->
         <div id="club-affiliations" class="tab-content" style="display:none;">
-            <p>This is the club affiliations section. You can update your club affiliations here.</p>
-            <button class="btn btn-outline-primary d-block mx-auto" onclick="showEditForm('club-affiliations')">Edit Club Affiliations</button>
-            <div id="club-affiliations-edit-form" class="edit-form" style="display:none;">
-                <h3>Edit Club Affiliations</h3>
-                <form>
-                    <div class="mb-3">
-                        <label for="clubAffiliationsInput" class="form-label">New Affiliations</label>
-                        <textarea id="clubAffiliationsInput" class="form-control" rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
-                </form>
-            </div>
+            <!-- Dynamic content will be injected here by profile.js -->
         </div>
 
         <!-- Profile Update Modal -->
@@ -195,7 +169,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/profile.js"></script>
+    <script src="../assets/js/profile.js" defer></script>
 </body>
 
 </html>

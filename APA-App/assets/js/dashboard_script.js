@@ -53,8 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 <div class="challenge-card d-flex align-items-center justify-content-between p-3 shadow-sm">
                     <div class="d-flex align-items-center gap-3">
                         <div class="icon">
-                            <svg width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                <path d="..." />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-eye" viewBox="0 0 16 16">
+                                <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8zm-2.5 0a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                             </svg>
                         </div>
                         <div>
@@ -98,8 +98,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="challenge-card d-flex align-items-center justify-content-between p-3 shadow-sm">
                         <div class="d-flex align-items-center gap-3">
                             <div class="icon">
-                                <svg width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="..." />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
+                                    <path d="M8 3.5a.5.5 0 0 1 .5.5v4h3a.5.5 0 0 1 0 1H7.5a.5.5 0 0 1-.5-.5v-4a.5.5 0 0 1 .5-.5z"/>
+                                    <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zM1.5 8a6.5 6.5 0 1 1 13 0 6.5 6.5 0 0 1-13 0z"/>
                                 </svg>
                             </div>
                             <div>
@@ -157,5 +158,5 @@ function updateChallengeStatus(matchId, action) {
 // Handle popup close button
 document.getElementById('closePopup').addEventListener('click', function () {
     const popup = document.getElementById('matchDetailsPopup');
-    popup.classList.add('hidden'); // Hide the popup
+    popup.classList.add('hidden');
 });

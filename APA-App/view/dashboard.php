@@ -15,8 +15,11 @@
     <div class="container-fluid d-flex justify-content-between align-items-center">
       <!-- Logo Section -->
       <div class="d-flex align-items-center gap-3">
-        <svg width="32" height="32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path d="..." />
+        <!-- Logo -->
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10" fill="black"/>
+            <circle cx="12" cy="12" r="6" fill="white"/>
+            <text x="12" y="16" font-size="6" font-family="Arial" font-weight="bold" text-anchor="middle" fill="black">8</text>
         </svg>
         <h2 class="mb-0">Ashesi Pool Association</h2>
       </div>
@@ -47,7 +50,7 @@
             <a href="events.php" class="nav-link text-dark">Events</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link text-dark">Challenge</a>
+            <a href="challenges.php" class="nav-link text-dark">Challenge</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link text-dark">Contact Support</a>

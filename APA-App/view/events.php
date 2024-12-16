@@ -1,3 +1,23 @@
+<?php
+include '../db/config.php';  // Include database connection
+
+// Fetch upcoming events (date greater than current time)
+$current_time = date('Y-m-d H:i:s');  // Get the current date and time
+$query = "SELECT * FROM events WHERE date > ? ORDER BY date ASC";
+$stmt = $conn->prepare($query);
+$stmt->bind_param('s', $current_time);  // Bind the current time to the query
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Fetch all events into an array
+$upcoming_events = [];
+while ($event = $result->fetch_assoc()) {
+    $upcoming_events[] = $event;
+}
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,8 +38,11 @@
         <div class="container-fluid d-flex justify-content-between align-items-center">
         <!-- Logo Section -->
         <div class="d-flex align-items-center gap-3">
-            <svg width="32" height="32" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-            <path d="..." />
+            <!-- Logo -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" fill="black"/>
+                <circle cx="12" cy="12" r="6" fill="white"/>
+                <text x="12" y="16" font-size="6" font-family="Arial" font-weight="bold" text-anchor="middle" fill="black">8</text>
             </svg>
             <h2 class="mb-0">Ashesi Pool Association</h2>
         </div>
@@ -50,7 +73,7 @@
                     <a href="events.php" class="nav-link text-dark">Events</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link text-dark">Challenge</a>
+                    <a href="challenges.php" class="nav-link text-dark">Challenge</a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link text-dark">Contact Support</a>
@@ -78,41 +101,37 @@
     <!-- Hero Section -->
     <section class="hero"></section>
     <br>
-
+    <?php
+    include '../actions/process_rsvp.php'
+    ?>
     <!-- Upcoming Competitions -->
     <div class="container mt-5">
         <h2>Upcoming Competitions</h2>
         <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="../assets/images/CLUB TOUR 2024(1)(1).png" class="card-img-top" alt="Competition 1">
-                    <div class="card-body">
-                        <h5 class="card-title">2024 Clubs Open 8-Ball</h5>
-                        <p class="card-text">Ashesi, APA</p>
-                        <a href="#" class="btn btn-primary">RSVP</a>
+            <?php if (!empty($upcoming_events)): ?>
+                <?php foreach ($upcoming_events as $event): ?>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="../assets/images/<?php echo $event['event_picture']; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($event['name']); ?>">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo htmlspecialchars($event['name']); ?></h5>
+                                <p class="card-text">Venue: <?php echo htmlspecialchars($event['venue']); ?></p>
+                                <p class="card-text">Date: <?php echo htmlspecialchars($event['date']); ?></p>
+                                    
+                                <!-- RSVP Button -->
+                                <button 
+                                    class="btn btn-primary rsvp-btn" 
+                                    data-event-id="<?php echo $event['event_id']; ?>">
+                                    RSVP
+                                </button>
+                                <div class="status-message" style="margin-top: 10px; color: green;"></div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="../assets/images/doubles_flyer.jpg" class="card-img-top" alt="Competition 2">
-                    <div class="card-body">
-                        <h5 class="card-title">2024 Doubles Tournament</h5>
-                        <p class="card-text">Ashesi, APA</p>
-                        <a href="#" class="btn btn-primary">RSVP</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="../assets/images/individuals_winners.jpg" class="card-img-top" alt="Competition 3">
-                    <div class="card-body">
-                        <h5 class="card-title">2024 Individuals Tournament</h5>
-                        <p class="card-text">The Hill, Arkono</p>
-                        <a href="#" class="btn btn-primary">RSVP</a>
-                    </div>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No upcoming competitions at the moment.</p>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -149,6 +168,46 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('.rsvp-btn').forEach(button => {
+        button.addEventListener('click', async function () {
+            const eventId = this.getAttribute('data-event-id'); // Get event ID from button
+            const statusMessage = this.nextElementSibling; // Placeholder for the status message
+
+            // Clear previous messages
+            statusMessage.textContent = '';
+            statusMessage.style.color = '';
+
+            try {
+                // Send RSVP request
+                const response = await fetch('../actions/process_rsvp.php', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `event_id=${eventId}`
+                });
+
+                // Parse JSON response
+                const result = await response.json();
+
+                // Update status message based on the result
+                if (result.status === 'success') {
+                    statusMessage.textContent = result.message;
+                    statusMessage.style.color = 'green';
+                } else {
+                    statusMessage.textContent = result.message;
+                    statusMessage.style.color = 'red';
+                }
+            } catch (error) {
+                statusMessage.textContent = 'You already RSVP`d for this event.';
+                statusMessage.style.color = 'red';
+                console.error(error);
+            }
+        });
+    });
+
+    </script>
 </body>
 
 </html>
