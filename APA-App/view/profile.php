@@ -1,6 +1,20 @@
 <?php
-// Fetch user ID from session
+header("Cache-Control: no-cache, no-store, must-revalidate"); // HTTP 1.1
+header("Pragma: no-cache"); // HTTP 1.0
+header("Expires: 0"); // Proxies
+
 session_start();
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit();
+}
+?>
+
+
+<?php
+// Fetch user ID from session
+// session_start();
 $user_id = $_SESSION['user_id'];
 $username = $_SESSION['username'];
 $email = $_SESSION['email'];
@@ -101,7 +115,7 @@ const email = "<?php echo $email; ?>";
 
             <!-- Profile Buttons -->
             <div class="btn-group d-flex gap-3 justify-content-center mb-4">
-                <button class="btn">Logout</button>
+                <button id="logoutButton" class="btn">Logout</button>
                 <button class="btn btn-message" data-bs-toggle="modal" data-bs-target="#profileModal">Update Profile</button>
             </div>
         </div>

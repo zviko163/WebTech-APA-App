@@ -195,4 +195,23 @@ document.addEventListener("DOMContentLoaded", function () {
   fetchProfileData();
 });
 
-
+// Implementing logout functionality
+document.getElementById('logoutButton').addEventListener('click', () => {
+  fetch('../actions/logout.php', {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  })
+  .then(response => response.json())
+  .then(data => {
+      if (data.success) {
+        window.location.replace('../view/login.php');
+          // Redirect the user to the login page
+          // window.location.href = '../view/login.php'; 
+      } else {
+          alert('Logout failed. Please try again.');
+      }
+  })
+  .catch(error => console.error('Error:', error));
+});

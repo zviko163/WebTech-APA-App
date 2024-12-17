@@ -1,65 +1,62 @@
 <?php
 include '../db/config.php';
 
-// error checking and debugging
+ini_set('display_errors', 1);
 error_reporting(E_ALL);
-ini_set('display errors', 1);
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = isset($_POST['username']) ? $_POST['username'] : null;
-    $email = isset($_POST['email']) ? $_POST['email'] : null;
-    $password = isset($_POST['password']) ? $_POST['password'] : null;
+    $username = $_POST['username'] ?? '';
+    $email = $_POST['email'] ?? '';
+    $password = $_POST['password'] ?? '';
 
-    // Check if fields are empty
+    // Validate inputs
     if (empty($username) || empty($email) || empty($password)) {
-        echo json_encode(['username' => $username, 'email' => $email, 'password' => $password]);
-        echo json_encode(['status' => 'error', 'message' => 'All fields are required.']);
+        echo "<script>alert('All fields are required.'); window.history.back();</script>";
         exit;
     }
 
     // Hash the password
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 
-    // Check if the email already exists
-    $check_email_query = $conn->prepare("SELECT user_id FROM users WHERE email = ?");
-    $check_email_query->bind_param("s", $email);
-    $check_email_query->execute();
-    $check_email_query->store_result();
+    // Check if the email or username already exists
+    $check_query = $conn->prepare("SELECT user_id FROM users WHERE email = ? OR username = ?");
+    $check_query->bind_param("ss", $email, $username);
+    $check_query->execute();
+    $check_query->store_result();
 
-    if ($check_email_query->num_rows > 0) {
-        echo "<script>alert('Email already exists.'); window.history.back();</script>";
-        // echo json_encode(['status' => 'error', 'message' => 'Email already exists.']);
-        $check_email_query->close();
+    if ($check_query->num_rows > 0) {
+        echo "<script>alert('Email or username already exists.'); window.history.back();</script>";
+        $check_query->close();
         exit;
     }
-    // Check if the username already exists
-    $check_username = $conn->prepare("SELECT user_id FROM users WHERE username = ?");
-    $check_username->bind_param("s", $username);
-    $check_username->execute();
-    $check_username->store_result();
-    
-    if ($check_username->num_rows > 0) {
-        echo "<script>alert('Username taken. Try another one'); window.history.back();</script>";
-        // echo json_encode(['status' => 'error', 'message' => 'Username already exists.']);
-        $check_username->close();
+    $check_query->close();
+
+    // Insert the user and create profile
+    $insert_user = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
+    $insert_user->bind_param("sss", $username, $email, $hashed_password);
+
+    if ($insert_user->execute()) {
+        $user_id = $conn->insert_id;
+        $insert_profile = $conn->prepare("INSERT INTO profiles (user_id) VALUES (?)");
+        $insert_profile->bind_param("i", $user_id);
+
+        // Attempt to execute the prepared statement for inserting the profile
+        if ($insert_profile->execute()) {
+            // Log success if the profile is created
+            // echo "Profile created successfully!";
+            header("Location: ../view/login.php");
+        }
+
+        $insert_profile->close();
+
+        // header("Location: ../view/login.php");
         exit;
-    }
-
-    // Insert the user
-    $insert_query = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, ?)");
-    $insert_query->bind_param("sss", $username, $email, $hashed_password);
-
-    if ($insert_query->execute()) {
-        // redirecting user to the login page
-        header("Location: ../view/login.php");
-        echo json_encode(['status' => 'success', 'message' => 'User registered successfully.']);
     } else {
-        echo json_encode(['status' => 'error', 'message' => 'Error: ' . $conn->error]);
+        echo "<script>alert('An error occurred. Please try again.'); window.history.back();</script>";
     }
 
-    // Close statements
-    $check_email_query->close();
-    $check_username->close();
-    $insert_query->close();
+    $insert_profile->close();
+    $insert_user->close();
 }
 ?>

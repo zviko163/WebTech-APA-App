@@ -79,7 +79,9 @@
   <main class="container-fluid mt-4">
     <!-- Welcome Section -->
     <section class="welcome-section text-center mb-4">
-      <h3 id="welcomeMessage">Welcome, Jack</h3>
+      <h3 id="welcomeMessage">
+          Welcome, <?= htmlspecialchars($_SESSION['username'] ?? 'Guest') ?>
+      </h3>
       <!-- <h5 class="text-muted">Place a challenge</h5> -->
     </section>
   
