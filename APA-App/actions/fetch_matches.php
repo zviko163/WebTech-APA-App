@@ -1,35 +1,37 @@
 <?php
 include '../db/config.php';
+
+// Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 header('Content-Type: application/json');
 
-// Prepare SQL query to fetch matches and join with users table
-$fetch_query = $conn->prepare("
-    SELECT 
-        m.match_id, 
-        u1.username AS challenger_name, 
-        u2.username AS challenged_name,
-        m.schedule_date
-    FROM matches m
-    JOIN users u1 ON m.challenger_id = u1.user_id
-    JOIN users u2 ON m.challenged_id = u2.user_id
-    WHERE m.winner IS NULL
-");
+// Query to fetch the match data along with challenger and challenged IDs
+$query = "SELECT m.match_id, m.schedule_date, c1.user_id AS challenger_id, c2.user_id AS challenged_id,
+          c1.username AS challenger, c2.username AS challenged
+          FROM matches m
+          JOIN users c1 ON m.challenger_id = c1.user_id
+          JOIN users c2 ON m.challenged_id = c2.user_id
+          WHERE m.status = 'scheduled'";
 
-$fetch_query->execute();
-$result = $fetch_query->get_result();
+$result = $conn->query($query);
 
-$matches = [];
-while ($row = $result->fetch_assoc()) {
-    $matches[] = [
-        'match_id' => $row['match_id'],
-        'challenger' => htmlspecialchars($row['challenger_name']),
-        'challenged' => htmlspecialchars($row['challenged_name']),
-        'schedule_date' => htmlspecialchars($row['schedule_date'])
-    ];
+if ($result->num_rows > 0) {
+    $matches = [];
+    while ($row = $result->fetch_assoc()) {
+        $matches[] = [
+            'match_id' => $row['match_id'],
+            'challenger' => $row['challenger'],
+            'challenger_id' => $row['challenger_id'],
+            'challenged' => $row['challenged'],
+            'challenged_id' => $row['challenged_id'],
+            'schedule_date' => $row['schedule_date']
+        ];
+    }
+    echo json_encode(['success' => true, 'matches' => $matches]);
+} else {
+    echo json_encode(['success' => false, 'error' => 'No matches found.']);
 }
 
-echo json_encode(['success' => true, 'matches' => $matches]);
-$fetch_query->close();
 $conn->close();
-exit();
 ?>

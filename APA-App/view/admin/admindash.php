@@ -74,61 +74,54 @@
         <main class="container-fluid mt-4">
             <!-- Welcome Section -->
             <section class="welcome-section text-center mb-4">
-            <h3>Welcome, Admin Jack</h3>
-            <!-- <h5 class="text-muted">Place a challenge</h5> -->
+                <h3>Welcome, Admin Jack</h3> <!-- This will be dynamically updated -->
             </section>
-        
+
             <!-- Statistics Section -->
-            <section class="row text-center mb-4">
+            <section class="row text-center mb-4 statistics-section">
                 <!-- Registered Users -->
                 <div class="col-12 col-md-4 mb-3">
                     <div class="card shadow-sm p-3">
                         <h5>Registered Users</h5>
-                        <h2 class="text-primary">100</h2>
+                        <h2 class="text-primary total-users">100</h2> <!-- This can be fetched separately if needed -->
                     </div>
                 </div>
-                
+
                 <!-- Total Events Held -->
                 <div class="col-12 col-md-4 mb-3">
                     <div class="card shadow-sm p-3">
                         <h5>Total Events Held</h5>
-                        <h2 class="text-primary">13</h2>
+                        <h2 class="text-primary total-events">13</h2> <!-- This will be dynamically updated -->
                     </div>
                 </div>
-                
+
                 <!-- Pending Events -->
                 <div class="col-12 col-md-4 mb-3">
                     <div class="card shadow-sm p-3">
                         <h5>Pending Events</h5>
-                        <h2 class="text-success">7</h2>
+                        <h2 class="text-success pending-events">7</h2> <!-- This will be dynamically updated -->
                     </div>
                 </div>
             </section>
 
-        
             <!-- Match Challenges html -->
             <div class="container scheduled-matches">
                 <h2>Scheduled Matches</h2>
                 <table class="table table-striped">
                     <thead>
-                    <tr id="match-1">
-                        <td>1</td>
-                        <td>Shammah vs Zviko</td>
-                        <td>
-                            <select class="form-select" onchange="declareWinner(1, this.value)">
-                                <option value="">Select Winner</option>
-                                <option value="5">Shammah</option>
-                                <option value="8">Zviko</option>
-                            </select>
-                        </td>
-                    </tr>
-
+                        <tr>
+                            <th>Match ID</th>
+                            <th>Match</th>
+                            <th>Schedule Date</th>
+                            <th>Select Winner</th>
+                        </tr>
                     </thead>
                     <tbody id="matches-body">
                         <!-- Dynamic match rows will be inserted here -->
                     </tbody>
                 </table>
             </div>
+
         </main>
 
         <!-- Bootstrap JS -->

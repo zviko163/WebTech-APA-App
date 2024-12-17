@@ -76,7 +76,7 @@
     <div class="container mt-5">
         <h2>Manage Users</h2>
         <!-- Users Table -->
-        <table class="table table-striped">
+        <table class="table table-striped" id="usersTable">
             <thead>
                 <tr>
                     <th>User ID</th>
@@ -88,32 +88,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>JohnDoe</td>
-                    <td>20</td>
-                    <td>15</td>
-                    <td>75%</td>
-                    <td>
-                        <button class="btn btn-sm btn-primary me-2" data-bs-toggle="collapse" data-bs-target="#editUserForm1">
-                            Edit
-                        </button>
-                        <button class="btn btn-sm btn-danger">Delete</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>JaneDoe</td>
-                    <td>10</td>
-                    <td>5</td>
-                    <td>50%</td>
-                    <td>
-                        <button class="btn btn-sm btn-primary me-2" data-bs-toggle="collapse" data-bs-target="#editUserForm2">
-                            Edit
-                        </button>
-                        <button class="btn btn-sm btn-danger">Delete</button>
-                    </td>
-                </tr>
+                <!-- User rows will be dynamically populated -->
             </tbody>
         </table>
 
@@ -121,16 +96,15 @@
         <div class="collapse mt-3" id="editUserForm1">
             <div class="card card-body">
                 <h5>Edit User Role</h5>
-                <form action="edit_user.php" method="POST">
-                    <input type="hidden" name="user_id" value="1">
+                <form id="editUserFormElement">
+                    <input type="hidden" id="editUserId" name="user_id">
                     <div class="mb-3">
                         <label for="userRole1" class="form-label">Role</label>
                         <select class="form-select" id="userRole1" name="role" required>
-                            <option value="admin">Admin</option>
-                            <option value="user">User</option>
+                            <!-- Options will be populated dynamically from the backend -->
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="button" class="btn btn-primary" onclick="editUserRole()">Save Changes</button>
                 </form>
             </div>
         </div>
@@ -146,7 +120,7 @@
         <div class="collapse mt-4" id="addUserForm">
             <div class="card card-body">
                 <h5>Add User</h5>
-                <form>
+                <form id="addUserFormElement">
                     <div class="mb-3">
                         <label for="addUsername" class="form-label">Username</label>
                         <input type="text" class="form-control" id="addUsername" name="username" required>
@@ -170,14 +144,14 @@
                             <option value="user">User</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary">Add User</button>
+                    <button type="button" class="btn btn-primary" onclick="addUser()">Add User</button>
                 </form>
             </div>
         </div>
     </div>
 
-
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <script src="../../assets/js/users_script.js"></script>
 </body>
 </html>
