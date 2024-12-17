@@ -36,3 +36,6 @@ Leaderboards:
 leaderboard_id(PK), user_id(PK), won(FK_profiles), lost(FK_profiles)
 Ranks:
 rank_id(PK), rank(intenger, based on win-rate), user_id(FK)
+
+
+check for session user_ids in each page and redirect to login if user_ids are not defined

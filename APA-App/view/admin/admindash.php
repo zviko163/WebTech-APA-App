@@ -1,3 +1,4 @@
+<?php include '../../db/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -69,7 +70,7 @@
             </div>
         </header>
     
-
+        <!-- Main Page content -->
         <main class="container-fluid mt-4">
             <!-- Welcome Section -->
             <section class="welcome-section text-center mb-4">
@@ -106,53 +107,34 @@
 
         
             <!-- Match Challenges html -->
-            <section class="container-fluid">
-            <!-- Recent Challenge -->
-            <section class="mt-4">
-                <h5 class="text-dark">Challenges</h5>
-                <div class="challenge-card d-flex align-items-center justify-content-between p-3 shadow-sm">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="icon">
-                    <svg width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="..." />
-                    </svg>
-                    </div>
-                    <div>
-                    <h6 class="mb-0">John Doe challenged you to a match!</h6>
-                    <p class="text-muted mb-0">5 minutes ago</p>
-                    </div>
-                </div>
-                <div class="d-flex gap-2">
-                    <button class="btn btn-approve">Approve</button>
-                    <button class="btn btn-decline">Decline</button>
-                </div>
-                </div>
-            </section>
-        
-            <!-- Upcoming Matches -->
-            <section class="mt-4">
-                <h5 class="text-dark">Upcoming Matches</h5>
-                <div class="challenge-card d-flex align-items-center justify-content-between p-3 shadow-sm">
-                <div class="d-flex align-items-center gap-3">
-                    <div class="icon">
-                    <svg width="24" height="24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                        <path d="..." />
-                    </svg>
-                    </div>
-                    <div>
-                    <h6 class="mb-0">Match against Team Alpha</h6>
-                    <p class="text-muted mb-0">Scheduled for tomorrow at 3 PM</p>
-                    </div>
-                </div>
-                <button class="btn btn-create">View Details</button>
-                </div>
-            </section>
-            </section>
+            <div class="container scheduled-matches">
+                <h2>Scheduled Matches</h2>
+                <table class="table table-striped">
+                    <thead>
+                    <tr id="match-1">
+                        <td>1</td>
+                        <td>Shammah vs Zviko</td>
+                        <td>
+                            <select class="form-select" onchange="declareWinner(1, this.value)">
+                                <option value="">Select Winner</option>
+                                <option value="5">Shammah</option>
+                                <option value="8">Zviko</option>
+                            </select>
+                        </td>
+                    </tr>
+
+                    </thead>
+                    <tbody id="matches-body">
+                        <!-- Dynamic match rows will be inserted here -->
+                    </tbody>
+                </table>
+            </div>
         </main>
-    
 
         <!-- Bootstrap JS -->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="../../assets/js/admindash.js"></script>
     </body>
 
 </html>
+

@@ -38,8 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = $username;
             $_SESSION['email'] = $email;
 
-            // Redirect to the dashboard
-            header("Location: ../view/dashboard.php");
+            // Redirect to the dashboard based on role
+            if($role_id == 1) {
+                header("Location: ../view/admin/admindash.php");
+                exit;
+            } else if ($role_id == 2) {
+                header("Location: ../view/dashboard.php");
+                exit;
+            }
+            // header("Location: ../view/dashboard.php");
             exit;
         } else {
             // Incorrect password
