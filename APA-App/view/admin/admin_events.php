@@ -1,3 +1,29 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['user_id'])){
+        header('Location: ../login.php');
+    }
+?>
+
+<?php
+include '../../db/config.php';  
+
+// Fetch upcoming events (date greater than current time)
+$current_time = date('Y-m-d H:i:s');  // Get the current date and time
+$query = "SELECT * FROM events WHERE date > ? ORDER BY date ASC";
+$stmt = $conn->prepare($query);
+$stmt->bind_param('s', $current_time); 
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Fetch all events into an array
+$upcoming_events = [];
+while ($event = $result->fetch_assoc()) {
+    $upcoming_events[] = $event;
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -49,15 +75,12 @@
                 <li class="nav-item">
                     <a href="admin_events.php" class="nav-link text-dark">Events</a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link text-dark">Matches</a>
-                </li>
             </ul>
         </nav>
     
         <!-- Profile Picture Section -->
         <div class="d-flex align-items-center gap-3">
-        <button class="btn btn-create px-4" onclick="window.location.href = '../profile.php'">Profile</button>
+        <button class="btn btn-create px-4" onclick="window.location.href = 'admin_profile.php'">Profile</button>
             <div
             class="profile-pic rounded-circle"
             style="
@@ -80,36 +103,30 @@
     <div class="container mt-5">
         <h2>Upcoming Competitions</h2>
         <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="../../assets/images/CLUB TOUR 2024(1)(1).png" class="card-img-top" alt="Competition 1">
-                    <div class="card-body">
-                        <h5 class="card-title">2024 Clubs Open 8-Ball</h5>
-                        <p class="card-text">Ashesi, APA</p>
-                        <a href="#" class="btn btn-primary">RSVP</a>
+            <?php if (!empty($upcoming_events)): ?>
+                <?php foreach ($upcoming_events as $event): ?>
+                    <div class="col-md-4">
+                        <div class="card">
+                            <img src="../../assets/images/<?php echo $event['event_picture']; ?>" class="card-img-top" alt="<?php echo htmlspecialchars($event['name']); ?>">
+                            <div class="card-body">
+                                <h5 class="card-title"><?php echo htmlspecialchars($event['name']); ?></h5>
+                                <p class="card-text">Venue: <?php echo htmlspecialchars($event['venue']); ?></p>
+                                <p class="card-text">Date: <?php echo htmlspecialchars($event['date']); ?></p>
+                                    
+                                <!-- RSVP Button -->
+                                <button 
+                                    class="btn btn-primary rsvp-btn" 
+                                    data-event-id="<?php echo $event['event_id']; ?>">
+                                    RSVP
+                                </button>
+                                <div class="status-message" style="margin-top: 10px; color: green;"></div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="../../assets/images/doubles_flyer.jpg" class="card-img-top" alt="Competition 2">
-                    <div class="card-body">
-                        <h5 class="card-title">2024 Doubles Tournament</h5>
-                        <p class="card-text">Ashesi, APA</p>
-                        <a href="#" class="btn btn-primary">RSVP</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <img src="../../assets/images/individuals_winners.jpg" class="card-img-top" alt="Competition 3">
-                    <div class="card-body">
-                        <h5 class="card-title">2024 Individuals Tournament</h5>
-                        <p class="card-text">The Hill, Arkono</p>
-                        <a href="#" class="btn btn-primary">RSVP</a>
-                    </div>
-                </div>
-            </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p>No upcoming competitions at the moment.</p>
+            <?php endif; ?>
         </div>
     </div>
 
@@ -123,39 +140,43 @@
     <!-- Create Event Form -->
     <div class="collapse mt-4" id="createEventForm">
         <div class="card card-body">
-            <form>
-                <div class="mb-3">
-                    <label for="eventName" class="form-label">Event Name</label>
-                    <input type="text" class="form-control" id="eventName" name="name" required>
-                </div>
-                <div class="mb-3">
-                    <label for="eventVenue" class="form-label">Venue</label>
-                    <input type="text" class="form-control" id="eventVenue" name="venue" required>
-                </div>
-                <div class="mb-3">
-                    <label for="eventDate" class="form-label">Date</label>
-                    <input type="date" class="form-control" id="eventDate" name="date" required>
-                </div>
-                <div class="mb-3">
-                    <label for="eventDescription" class="form-label">Description</label>
-                    <textarea class="form-control" id="eventDescription" name="description" rows="3" required></textarea>
-                </div>
-                <div class="mb-3">
-                    <label for="eventCapacity" class="form-label">Capacity</label>
-                    <input type="number" class="form-control" id="eventCapacity" name="capacity" required>
-                </div>
-                <div class="mb-3">
-                    <label for="eventPrize" class="form-label">Prize</label>
-                    <input type="text" class="form-control" id="eventPrize" name="prize">
-                </div>
-                <div class="mb-3">
-                    <label for="eventPicture" class="form-label">Event Picture</label>
-                    <input type="file" class="form-control" id="eventPicture" name="event_picture" accept="image/*">
-                </div>
-                <div class="text-center">
-                    <button type="submit" class="btn btn-primary">Save Event</button>
-                </div>
-            </form>
+        <form id="eventForm">
+            <div class="mb-3">
+                <label for="eventName" class="form-label">Event Name</label>
+                <input type="text" class="form-control" id="eventName" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="eventVenue" class="form-label">Venue</label>
+                <input type="text" class="form-control" id="eventVenue" name="venue" required>
+            </div>
+            <div class="mb-3">
+                <label for="eventDate" class="form-label">Date</label>
+                <input type="date" class="form-control" id="eventDate" name="date" required>
+            </div>
+            <div class="mb-3">
+                <label for="eventDescription" class="form-label">Description</label>
+                <textarea class="form-control" id="eventDescription" name="description" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="eventCapacity" class="form-label">Capacity</label>
+                <input type="number" class="form-control" id="eventCapacity" name="capacity" required>
+            </div>
+            <div class="mb-3">
+                <label for="eventPrize" class="form-label">Prize</label>
+                <input type="text" class="form-control" id="eventPrize" name="prize">
+            </div>
+            <div class="mb-3">
+                <label for="eventPicture" class="form-label">Event Picture</label>
+                <input type="file" class="form-control" id="eventPicture" name="event_picture" accept="image/*">
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" onclick="saveEvent()">Save Event</button>
+            </div>
+        </form>
+
+        <!-- Display Message -->
+        <div id="response" class="mt-4 text-center"></div>
+
         </div>
     </div>
 
@@ -193,6 +214,9 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JS -->
+    <script src="../../assets/js/admin_events.js"></script>
+    <!-- <script src="../../assets/js/events.js"></script> -->
 </body>
 
 </html>

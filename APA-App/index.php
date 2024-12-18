@@ -26,10 +26,6 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">Events</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Competitions</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">King of the Hill</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Rankings</a></li>
                     <li class="nav-item"><a class="nav-link" href="view/signup.php">Sign Up</a></li>
                 </ul>
             </div>

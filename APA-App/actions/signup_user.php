@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'] ?? '';
     $email = $_POST['email'] ?? '';
     $password = $_POST['password'] ?? '';
+    $confirmPassword = $_POST['confirmPassword'] ?? '';
 
     // Validate inputs
     if (empty($username) || empty($email) || empty($password)) {
@@ -16,6 +17,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // checking passwords match
+    if ($password != $confirmPassword) {
+        echo "<script>alert('Passwords do not match.'); window.history.back();</script>";
+        exit;
+    }
     // Hash the password
     $hashed_password = password_hash($password, PASSWORD_BCRYPT);
 

@@ -6,7 +6,7 @@ header("Expires: 0"); // Proxies
 session_start();
 
 if (!isset($_SESSION['user_id'])) {
-    header('Location: login.php');
+    header('Location: ../login.php');
     exit();
 }
 ?>
@@ -36,7 +36,7 @@ const email = "<?php echo $email; ?>";
   <title>Profile</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="../assets/css/profile.css">
+  <link rel="stylesheet" href="../../assets/css/profile.css">
 </head>
 
 <body>
@@ -68,24 +68,18 @@ const email = "<?php echo $email; ?>";
   
       <!-- Navigation Links -->
       <nav class="collapse navbar-collapse justify-content-center" id="navbarNav">
-        <ul class="navbar-nav gap-3">
-          <li class="nav-item">
-            <a href="dashboard.php" class="nav-link text-dark">Dashboard</a>
-          </li>
-          <li class="nav-item">
-            <a href="leaderboard.php" class="nav-link text-dark">Leaderboard</a>
-          </li>
-          <li class="nav-item">
-            <a href="events.php" class="nav-link text-dark">Events</a>
-          </li>
-          <li class="nav-item">
-            <a href="challenges.php" class="nav-link text-dark">Challenge</a>
-          </li>
-          <li class="nav-item">
-            <a href="support.php" class="nav-link text-dark">Contact Support</a>
-          </li>
-        </ul>
-      </nav>
+            <ul class="navbar-nav gap-3">
+                <li class="nav-item">
+                    <a href="admindash.php" class="nav-link text-dark">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a href="users.php" class="nav-link text-dark">Users</a>
+                </li>
+                <li class="nav-item">
+                    <a href="admin_events.php" class="nav-link text-dark">Events</a>
+                </li>
+            </ul>
+        </nav>
   
       <!-- Profile Picture Section -->
       <div class="d-flex align-items-center gap-3">
@@ -145,40 +139,36 @@ const email = "<?php echo $email; ?>";
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="profileModalLabel">Update Profile</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <h5 class="modal-title" id="profileModalLabel">Update Profile</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <form id="updateProfileForm">
+                        <form>
                             <div class="mb-3">
                                 <label for="profilePicture" class="form-label">Profile Picture</label>
                                 <input type="file" class="form-control" id="profilePicture">
                             </div>
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" name="username" id="username" value="MichaelScott" required>
+                                <input type="text" class="form-control" id="username" value="MichaelScott" required>
                             </div>
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control" name="password" id="password" required>
+                                <input type="password" class="form-control" id="password" required>
                             </div>
                             <div class="mb-3">
                                 <label for="confirmPassword" class="form-label">Confirm Password</label>
-                                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" required>
+                                <input type="password" class="form-control" id="confirmPassword" required>
                             </div>
                         </form>
                     </div>
                     <div class="modal-footer">
-                      <div id="updateResponse" style="color: red;"></div> <!-- Response Message -->
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary" id="saveProfileChanges" onclick="updateProfile()">Save Changes</button>
-                  </div>
-
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save Changes</button>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- <div id="updateResponse"></div> To display success/error messages -->
-
 
 
     </main>
@@ -187,7 +177,7 @@ const email = "<?php echo $email; ?>";
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../assets/js/profile.js"></script>
+    <script src="../../assets/js/admin_profile.js"></script>
 </body>
 
 </html>

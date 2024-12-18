@@ -13,6 +13,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
+        $user_id = $conn->insert_id;
+        $insert_profile = $conn->prepare("INSERT INTO profiles (user_id) VALUES (?)");
+        $insert_profile->bind_param("i", $user_id);
+        $insert_profile->execute();
         echo json_encode(['success' => true]);
     } else {
         echo json_encode(['success' => false, 'error' => 'Failed to add user.']);

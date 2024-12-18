@@ -1,4 +1,10 @@
 <?php
+    session_start();
+    if(!isset($_SESSION['user_id'])){
+        header('Location: login.php');
+    }
+?>
+<?php
 include '../db/config.php';  // Include database connection
 
 // Fetch upcoming events (date greater than current time)

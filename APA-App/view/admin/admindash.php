@@ -1,3 +1,10 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['user_id'])){
+        header('Location: ../login.php');
+    }
+?>
+
 <?php include '../../db/config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,15 +54,12 @@
                     <li class="nav-item">
                         <a href="admin_events.php" class="nav-link text-dark">Events</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link text-dark">Matches</a>
-                    </li>
                 </ul>
             </nav>
         
             <!-- Profile Section -->
             <div class="d-flex align-items-center gap-3">
-                <button class="btn btn-create px-4" onclick="window.location.href = '../profile.php'">Profile</button>
+                <button class="btn btn-create px-4" onclick="window.location.href = 'admin_profile.php'">Profile</button>
                 <div
                 class="profile-pic rounded-circle"
                 style="

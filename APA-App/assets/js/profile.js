@@ -215,3 +215,66 @@ document.getElementById('logoutButton').addEventListener('click', () => {
   })
   .catch(error => console.error('Error:', error));
 });
+
+// Implementing profile update functionality
+window.updateProfile = function () {
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirmPassword').value;
+
+    let profileData = {};
+
+    // Check if the user wants to update the username
+    if (username !== "") {
+        profileData.username = username;
+    }
+
+    // Check if the user wants to update the password
+    if (password !== "" && password === confirmPassword) {
+        profileData.password = password;
+    } else if (password !== confirmPassword) {
+        // If password and confirm password don't match, show an error
+        const responseDiv = document.getElementById('updateResponse');
+        responseDiv.textContent = 'Passwords do not match.';
+        responseDiv.style.color = 'red';
+        return;
+    }
+
+    // If neither username nor password is provided
+    if (Object.keys(profileData).length === 0) {
+        const responseDiv = document.getElementById('updateResponse');
+        responseDiv.textContent = 'Please provide either a new username or password to update.';
+        responseDiv.style.color = 'red';
+        return;
+    }
+
+    // Send JSON to the server
+    fetch('../actions/update_profile.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(profileData) // Send only the updated fields
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log("Response from server:", data); // Debugging log
+        const responseDiv = document.getElementById('updateResponse');
+        if (data.success) {
+            responseDiv.textContent = data.success;
+            responseDiv.style.color = 'green';
+        } else {
+            responseDiv.textContent = data.error;
+            responseDiv.style.color = 'red';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        const responseDiv = document.getElementById('updateResponse');
+        responseDiv.textContent = 'An unexpected error occurred.';
+        responseDiv.style.color = 'red';
+    });
+};
+
+// Attach the function to the Save Changes button
+// document.getElementById('saveProfileChanges').onclick = updateProfile;
