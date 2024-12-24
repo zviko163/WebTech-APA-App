@@ -3,6 +3,8 @@
     if(!isset($_SESSION['user_id'])){
         header('Location: login.php');
     }
+
+    $picture = $_SESSION['picture'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +77,7 @@
             style="
                 width: 40px;
                 height: 40px;
-                background-image: url('../assets/images/chalk.jpg');
+                background-image: url('<?php echo $picture; ?>');
                 background-size: cover;
                 background-position: center;
             "

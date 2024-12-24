@@ -1,5 +1,6 @@
 <?php
 include '../db/config.php';  // Include database connection
+session_start();  
 
 // Fetch upcoming events (date greater than current time)
 $current_time = date('Y-m-d H:i:s');  // Get the current date and time
@@ -89,7 +90,7 @@ while ($event = $result->fetch_assoc()) {
             style="
                 width: 40px;
                 height: 40px;
-                background-image: url('../assets/images/chalk.jpg');
+                background-image: url('<?php echo $_SESSION['picture'] ?? '../assets/images/chalk.jpg'; ?>');
                 background-size: cover;
                 background-position: center;
             "

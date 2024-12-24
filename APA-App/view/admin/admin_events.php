@@ -165,12 +165,23 @@ while ($event = $result->fetch_assoc()) {
                 <label for="eventPrize" class="form-label">Prize</label>
                 <input type="text" class="form-control" id="eventPrize" name="prize">
             </div>
+            <!-- <div class="mb-3">
+                <label for="eventPicture" class="form-label">Event Picture</label>
+                <input type="file" class="form-control" id="eventPicture" name="event_picture" accept="image/*">
+            </div> -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary" onclick="saveEvent()">Save Event</button>
+            </div>
+        </form>
+
+        <!-- testing the submission of pictures to cloudinary -->
+        <form id="pictureForm">
             <div class="mb-3">
                 <label for="eventPicture" class="form-label">Event Picture</label>
                 <input type="file" class="form-control" id="eventPicture" name="event_picture" accept="image/*">
             </div>
             <div class="text-center">
-                <button type="submit" class="btn btn-primary" onclick="saveEvent()">Save Event</button>
+                <button type="submit" class="btn btn-primary" onclick="savePicture()">Save Picture</button>
             </div>
         </form>
 
@@ -216,7 +227,31 @@ while ($event = $result->fetch_assoc()) {
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Custom JS -->
     <script src="../../assets/js/admin_events.js"></script>
-    <!-- <script src="../../assets/js/events.js"></script> -->
+
+    <script>
+        window.savePicture = function() {
+            const form = document.getElementById('eventForm');
+            const formData = new FormData(form);
+            const eventPictureInput = document.getElementById('eventPicture');
+            formData.append('event_picture', eventPictureInput.files[0]);
+
+            fetch('../../actions/upload_event_picture.php', {
+                method: 'POST',
+                body: formData,
+            })
+                .then(response => response.json())
+                .then(result => {
+                    if (result.success) {
+                        alert('Event image uploaded successfully: ' + result.url);
+                        // Save other event details with the image URL
+                    } else {
+                        alert('Event image upload failed: ' + result.error);
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        }
+
+    </script>
 </body>
 
 </html>

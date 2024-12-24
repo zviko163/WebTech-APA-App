@@ -38,6 +38,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $_SESSION['username'] = $username;
             $_SESSION['email'] = $email;
 
+            // Now, you can query the profiles table for the profile picture
+            $sql = "SELECT picture FROM profiles WHERE user_id = ?";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param('i', $user_id);
+            $stmt->execute();
+            $stmt->bind_result($picture);
+            $stmt->fetch();
+            $stmt->close();
+
+            // now setting the picture in the session
+            $_SESSION['picture'] = $picture;
+
             // Redirect to the dashboard based on role
             if($role_id == 1) {
                 header("Location: ../view/admin/admindash.php");

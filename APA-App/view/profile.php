@@ -152,9 +152,9 @@ const email = "<?php echo $email; ?>";
                         <form id="updateProfileForm">
                             <div class="mb-3">
                                 <label for="profilePicture" class="form-label">Profile Picture</label>
-                                <input type="file" class="form-control" id="profilePicture">
+                                <input type="file" class="form-control" id="profilePicture" name="profile_picture" accept="image/*">
                             </div>
-                            <div class="mb-3">
+                            <!-- <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
                                 <input type="text" class="form-control" name="username" id="username" value="MichaelScott" required>
                             </div>
@@ -165,13 +165,14 @@ const email = "<?php echo $email; ?>";
                             <div class="mb-3">
                                 <label for="confirmPassword" class="form-label">Confirm Password</label>
                                 <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" required>
-                            </div>
+                            </div> -->
+                            <button type="submit" class="btn btn-primary" id="saveProfileChanges" onclick="uploadProfilePicture(event)">Save Changes</button>
+
                         </form>
                     </div>
                     <div class="modal-footer">
                       <div id="updateResponse" style="color: red;"></div> <!-- Response Message -->
                       <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary" id="saveProfileChanges" onclick="updateProfile()">Save Changes</button>
                   </div>
 
                 </div>
@@ -188,6 +189,43 @@ const email = "<?php echo $email; ?>";
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/profile.js"></script>
+    <script>
+      function uploadProfilePicture(event) {
+        event.preventDefault();
+        const form = document.getElementById('updateProfileForm');
+        const formData = new FormData(form);
+        const profilePictureInput = document.getElementById('profilePicture');
+        formData.append('profile_picture', profilePictureInput.files[0]);
+
+        fetch('../actions/upload_profile_picture.php', {
+            method: 'POST',
+            body: formData,
+        })    
+        .then(response => response.text())  // Read the response as text first
+        .then(responseText => {
+            // Log the raw response text to understand what is returned
+            console.log('Raw Response:', responseText);
+
+            try {
+                // Try parsing it as JSON
+                const result = JSON.parse(responseText);
+                
+                if (result.success) {
+                    alert('Profile image uploaded successfully: ' + result.url);
+                } else {
+                    alert('Profile image upload failed: ' + result.error);
+                }
+            } catch (error) {
+                // If the response isn't valid JSON, log the error
+                console.error('Error parsing response as JSON:', error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+     }
+
+    </script>
 </body>
 
 </html>

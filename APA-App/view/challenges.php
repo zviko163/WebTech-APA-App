@@ -95,7 +95,7 @@ while ($event = $result->fetch_assoc()) {
             style="
                 width: 40px;
                 height: 40px;
-                background-image: url('../assets/images/chalk.jpg');
+                background-image: url('<?php echo $_SESSION['picture'] ?? '../assets/images/chalk.jpg'; ?>');
                 background-size: cover;
                 background-position: center;
             "

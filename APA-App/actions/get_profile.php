@@ -22,8 +22,9 @@ $query = "
     LEFT JOIN user_awards ua ON p.user_id = ua.user_id
     LEFT JOIN awards a ON ua.award_id = a.award_id
     WHERE p.user_id = ?
-    GROUP BY p.user_id
+    GROUP BY p.user_id, p.bio, p.picture, p.club
 ";
+
 
 $stmt = $conn->prepare($query);
 $stmt->bind_param("i", $user_id);
